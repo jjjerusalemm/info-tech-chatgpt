@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How ChatGPT is Transforming Human Life</title>
+
+    <!-- Simple techy styles, all in one file -->
+    <style>
+        :root {
+            --bg: #050816;
+            --bg-soft: #0b1020;
+            --card: #111827;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.18);
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --border-subtle: rgba(148, 163, 184, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* HEADER / HERO */
+        header {
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(14px);
+            background: linear-gradient(to bottom, rgba(15, 23, 42, .9), rgba(15, 23, 42, 0.7));
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+
+        .wrapper {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 1.4rem;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .brand-orb {
+            width: 26px;
+            height: 26px;
+            border-radius: 999px;
+            background: radial-gradient(circle, #a5b4fc, #38bdf8, #0ea5e9);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-orb::after {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border-radius: inherit;
+            border: 1px solid rgba(15, 23, 42, 0.65);
+            box-shadow: 0 0 25px rgba(15, 23, 42, 0.6) inset;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            font-size: 0.78rem;
+        }
+
+        nav a {
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+        }
+
+        nav a:hover {
+            border-color: var(--accent-soft);
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--accent);
+        }
+
+        /* Hero row */
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
+            gap: 1.5rem;
+            padding: 0.9rem 0 1.6rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-text p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            max-width: 34rem;
+        }
+
+        .hero-tagline {
+            margin-top: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--accent-soft);
+            font-size: 0.75rem;
+            color: var(--accent);
+        }
+
+        .hero-tagline span.dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.9);
+        }
+
+        /* Animated "chat window" */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+        }
+
+        .chat-card {
+            width: 100%;
+            max-width: 330px;
+            background: radial-gradient(circle at top left, #1f2937, #020617 60%);
+            border-radius: 1rem;
+            padding: 1rem 1rem 1.1rem;
+            box-shadow:
+                0 0 25px rgba(15, 23, 42, 0.8),
+                0 0 40px rgba(56, 189, 248, 0.25);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.7rem;
+        }
+
+        .chat-status span.dot-row {
+            display: flex;
+            gap: 0.15rem;
+        }
+
+        .chat-status span.dot-row span {
+            width: 4px;
+            height: 4px;
+            border-radius: 999px;
+            background: rgba(148, 163, 184, 0.8);
+        }
+
+        .chat-bubbles {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            font-size: 0.78rem;
+        }
+
+        .bubble {
+            max-width: 85%;
+            padding: 0.45rem 0.6rem;
+            border-radius: 0.6rem;
+            position: relative;
+            animation: floatUp 7s infinite;
+        }
+
+        .bubble.user {
+            margin-left: auto;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.6);
+        }
+
+        .bubble.ai {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.35);
+        }
+
+        .bubble:nth-child(1) { animation-delay: 0s; }
+        .bubble:nth-child(2) { animation-delay: 1s; }
+        .bubble:nth-child(3) { animation-delay: 2s; }
+
+        .typing {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.14rem;
+        }
+
+        .typing span {
+            width: 4px;
+            height: 4px;
+            border-radius: 999px;
+            background: rgba(148, 163, 184, 0.7);
+            animation: blink 1.2s infinite;
+        }
+
+        .typing span:nth-child(2) { animation-delay: 0.15s; }
+        .typing span:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-1px); }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-4px); opacity: 0.7; }
+        }
+
+        /* MAIN CONTENT */
+        main {
+            padding: 1.4rem 0 2.6rem;
+        }
+
+        section {
+            background: linear-gradient(to bottom right, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.88));
+            border-radius: 0.9rem;
+            padding: 1.3rem 1.4rem 1.4rem;
+            margin-bottom: 1.1rem;
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.5);
+        }
+
+        .section-header {
+            margin-bottom: 0.6rem;
+        }
+
+        .section-label {
+            font-size: 0.73rem;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--text-muted);
+            margin-bottom: 0.18rem;
+        }
+
+        section h2 {
+            font-size: 1.15rem;
+        }
+
+        section p {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .muted {
+            color: var(--text-muted);
+        }
+
+        ul.points {
+            list-style: disc;
+            margin-left: 1.3rem;
+            font-size: 0.9rem;
+        }
+
+        ul.points li {
+            margin-bottom: 0.35rem;
+        }
+
+        /* STATS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.6rem;
+        }
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 0.75rem;
+            padding: 0.8rem;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+        }
+
+        .stat-number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.15rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .image-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 0.9rem;
+            margin-top: 0.8rem;
+        }
+
+        figure {
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 0.65rem;
+            padding: 0.5rem;
+            border: 1px dashed rgba(148, 163, 184, 0.7);
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        figure img {
+            max-width: 100%;
+            border-radius: 0.4rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 0.9rem;
+            margin-top: 0.4rem;
+        }
+
+        .case-card {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 0.75rem;
+            padding: 0.8rem;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+        }
+
+        .case-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin-bottom: 0.15rem;
+        }
+
+        .case-card h3 {
+            font-size: 0.98rem;
+            margin-bottom: 0.25rem;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            padding: 0 0 1.8rem;
+        }
+
+        footer a {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-bottom: 1.1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+        }
+    </style>
+</head>
+<body id="top">
+
+<header>
+    <div class="wrapper">
+        <div class="top-bar">
+            <div class="brand">
+                <div class="brand-orb"></div>
+                <span>ChatGPT Technology Overview – Group Project</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#why">Why ChatGPT</a></li>
+                    <li><a href="#what">What is ChatGPT</a></li>
+                    <li><a href="#how">How it works</a></li>
+                    <li><a href="#stats">Statistics</a></li>
+                    <li><a href="#apps">Applications</a></li>
+                    <li><a href="#ethics1">Ethical Lens 1</a></li>
+                    <li><a href="#ethics2">Ethical Lens 2</a></li>
+                    <li><a href="#social">Social &amp; Political</a></li>
+                    <li><a href="#future">Future</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="hero">
+            <div class="hero-text">
+                <h1>How ChatGPT is Transforming Human Life</h1>
+                <p>
+                    A simple overview of ChatGPT in 2025 – what it is, how it works,
+                    where it is used, and the ethical questions it raises.
+                </p>
+                <div class="hero-tagline">
+                    <span class="dot"></span>
+                    <span>AI, ethics, and real-world impact</span>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="chat-card">
+                    <div class="chat-status">
+                        <span>ChatGPT · demo</span>
+                        <span class="dot-row">
+                            <span></span><span></span><span></span>
+                        </span>
+                    </div>
+                    <div class="chat-bubbles">
+                        <div class="bubble user">
+                            How is AI changing everyday life?
+                        </div>
+                        <div class="bubble ai">
+                            It shows up in search, social media, education, and work tools—
+                            often in ways we don't even see.
+                        </div>
+                        <div class="bubble ai">
+                            <span class="typing">
+                                <span></span><span></span><span></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="wrapper">
+    <!-- WHY CHATGPT -->
+    <section id="why">
+        <div class="section-header">
+            <div class="section-label">Overview</div>
+            <h2>Why ChatGPT?</h2>
+        </div>
+        <p>
+            <!-- TODO: Replace with your “Why ChatGPT / Why we chose this technology” slide. -->
+            ChatGPT is currently one of the most visible AI tools in the world. Our group
+            chose it because students, businesses, and regular users are already relying
+            on it for writing, coding, and problem-solving. It is a clear example of how
+            generative AI is moving from a new trend to an everyday tool.
+        </p>
+    </section>
+
+    <!-- WHAT IS CHATGPT -->
+    <section id="what">
+        <div class="section-header">
+            <div class="section-label">Technology</div>
+            <h2>What is ChatGPT?</h2>
+        </div>
+        <p>
+            <!-- TODO: Define ChatGPT in your own words. -->
+            ChatGPT is a conversational AI system created by OpenAI. It is built on a
+            large language model that was trained on huge amounts of text from books,
+            articles, and websites. The model predicts the next word in a sentence,
+            one word at a time, which allows it to respond to questions, summaries,
+            and prompts in a natural way.
+        </p>
+        <p class="muted">
+            It does not “think” like a human. Instead, it uses patterns in data to
+            generate likely responses – which is powerful, but sometimes inaccurate.
+        </p>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+        <div class="section-header">
+            <div class="section-label">How it works</div>
+            <h2>How ChatGPT works</h2>
+        </div>
+        <p>
+            <!-- TODO: Use your “How it works” slide. Keep it simple. -->
+            At a high level, ChatGPT:
+        </p>
+        <ul class="points">
+            <li>Takes the user’s text input and converts it into numeric tokens.</li>
+            <li>Runs those tokens through many layers of a neural network that has
+                learned patterns from training data.</li>
+            <li>Predicts the most likely next token over and over, generating a full
+                response.</li>
+            <li>Uses techniques like reinforcement learning from human feedback (RLHF)
+                to make answers safer and more helpful.</li>
+        </ul>
+    </section>
+
+    <!-- STATS -->
+    <section id="stats">
+        <div class="section-header">
+            <div class="section-label">Data &amp; Adoption</div>
+            <h2>Statistics: how big is ChatGPT?</h2>
+        </div>
+        <p>
+            <!-- TODO: Short intro sentence from your statistics slides. -->
+            The numbers behind ChatGPT show how quickly generative AI has spread.
+        </p>
+
+        <div class="stats-grid">
+            <!-- TODO: replace numbers + labels with your real stats -->
+            <div class="stat-card">
+                <div class="stat-number">X M+</div>
+                <div class="stat-label">Active users per month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">Y%</div>
+                <div class="stat-label">Of students who have tried AI tools</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">Z%</div>
+                <div class="stat-label">Of companies exploring generative AI</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">N</div>
+                <div class="stat-label">Languages supported by ChatGPT</div>
+            </div>
+        </div>
+
+        <div class="image-row">
+            <!-- IMAGE PLACEHOLDERS: swap src with your bar charts / graphs -->
+            <figure>
+                <!-- Example: <img src="images/usage-by-age.png" alt="Usage by age group"> -->
+                <img src="images/stat-1.png" alt="Statistic chart 1 (replace with your own image)">
+                <figcaption>Chart 1 – Example statistic from our research.</figcaption>
+            </figure>
+            <figure>
+                <img src="images/stat-2.png" alt="Statistic chart 2 (replace with your own image)">
+                <figcaption>Chart 2 – Example statistic from our research.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- APPLICATIONS / CASE STUDIES -->
+    <section id="apps">
+        <div class="section-header">
+            <div class="section-label">Applications</div>
+            <h2>Applications of ChatGPT: case studies</h2>
+        </div>
+        <p>
+            <!-- TODO: Brief 1–2 sentence intro pulled from your “Application of the technology” slide. -->
+            We focused on two real-world areas where ChatGPT is already changing how
+            people work: education and healthcare.
+        </p>
+
+        <div class="case-grid">
+            <!-- Education case -->
+            <div class="case-card">
+                <div class="case-tag">Case Study – Education</div>
+                <h3><!-- TODO: Name of your education case --></h3>
+                <p>
+                    <!-- TODO: What happened? -->
+                    <strong>What happened:</strong> [Replace this with a short summary of the
+                    education case from your slides.]
+                </p>
+                <p>
+                    <!-- TODO: Why it matters? -->
+                    <strong>Why it matters:</strong> [Explain the impact on students, teachers,
+                    learning outcomes, etc.]
+                </p>
+                <p>
+                    <!-- TODO: Key findings -->
+                    <strong>Key findings:</strong> [List 2–3 key insights from this case.]
+                </p>
+            </div>
+
+            <!-- Healthcare case -->
+            <div class="case-card">
+                <div class="case-tag">Case Study – Healthcare</div>
+                <h3><!-- TODO: Name of your healthcare case --></h3>
+                <p>
+                    <strong>What happened:</strong> [Short summary of how ChatGPT was used
+                    in a health / medical context.]
+                </p>
+                <p>
+                    <strong>Why it matters:</strong> [Explain the value for patients, doctors,
+                    or health systems.]
+                </p>
+                <p>
+                    <strong>Key findings:</strong> [2–3 key takeaways from this case.]
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ETHICAL LENS 1 -->
+    <section id="ethics1">
+        <div class="section-header">
+            <div class="section-label">Ethical Lens</div>
+            <h2>Ethical lens 1</h2>
+        </div>
+        <p>
+            <!-- TODO: Put your first ethical framework here (e.g., utilitarianism / rights / justice). -->
+            [Explain your first ethical lens in 1–2 sentences, then apply it to ChatGPT.]
+        </p>
+        <ul class="points">
+            <!-- TODO: Turn your slide bullets into 3–4 short points. -->
+            <li>[Point 1 about how this lens judges the benefits and harms of ChatGPT.]</li>
+            <li>[Point 2 about fairness, access, or who is helped vs harmed.]</li>
+            <li>[Point 3 – your own observation / conclusion.]</li>
+        </ul>
+    </section>
+
+    <!-- ETHICAL LENS 2 -->
+    <section id="ethics2">
+        <div class="section-header">
+            <div class="section-label">Ethical Lens</div>
+            <h2>Ethical lens 2</h2>
+        </div>
+        <p>
+            <!-- TODO: Your second ethical lens. -->
+            [Describe the second ethical framework and what it says about using ChatGPT.]
+        </p>
+        <ul class="points">
+            <li>[Point 1 – new angle compared to lens 1.]</li>
+            <li>[Point 2 – specific concern (e.g., surveillance, bias, autonomy).]</li>
+            <li>[Point 3 – where this lens would draw the line on “acceptable” use.]</li>
+        </ul>
+    </section>
+
+    <!-- SOCIAL / POLITICAL -->
+    <section id="social">
+        <div class="section-header">
+            <div class="section-label">Society &amp; Policy</div>
+            <h2>Social and political concerns</h2>
+        </div>
+        <p>
+            <!-- TODO: Use the bullets from your “social & political concerns” slide. -->
+            ChatGPT is not just a technical tool – it changes power, jobs, and access
+            to information.
+        </p>
+        <ul class="points">
+            <li>[Impact on jobs and who might be replaced or reskilled.]</li>
+            <li>[Who controls the data and whose values are built into the model.]</li>
+            <li>[Concerns about misinformation, deepfakes, or political manipulation.]</li>
+            <li>[Equity issues – who gets high-quality AI and who is left out.]</li>
+        </ul>
+    </section>
+
+    <!-- FUTURE / RECOMMENDATIONS -->
+    <section id="future">
+        <div class="section-header">
+            <div class="section-label">Looking Ahead</div>
+            <h2>Future recommendations</h2>
+        </div>
+        <p>
+            <!-- TODO: Use your “future recommendations” / conclusion slide. -->
+            Based on our research, we recommend:
+        </p>
+        <ul class="points">
+            <li>[Recommendation for developers / companies – e.g., more transparency,
+                bias testing, clear data policies.]</li>
+            <li>[Recommendation for schools – guidelines for responsible student use,
+                not total bans.]</li>
+            <li>[Recommendation for governments – regulation focused on high-risk uses
+                like health, finance, and elections.]</li>
+            <li>[Personal recommendation – how individuals should use ChatGPT critically
+                instead of blindly trusting it.]</li>
+        </ul>
+        <p class="muted">
+            ChatGPT shows how powerful AI can be – but also why human judgment,
+            ethics, and clear rules are still necessary.
+        </p>
+    </section>
+</main>
+
+<footer>
+    <div class="wrapper">
+        <p>
+            NOVA – Information Technology · Group project on emerging technology: ChatGPT.
+            <br />
+            <a href="#top">Back to top</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
