@@ -419,6 +419,18 @@
             opacity:0.95;
         
         }
+        .video-wrapper{ 
+            margin-top:1.5rem;
+            display: flex
+            justify-content: center;
+        }
+        .video-wrapper iframe{
+            width:100%;
+            max-width:720px;
+            height:405;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,0.12);
+        }
     </style>
 </head>
 <body id="top">
@@ -602,7 +614,17 @@
         <p class="muted">
             NOTE: ChatGPT does not understand feelings or think independently; it relies on patterns 
             from data, not human reasoning.
-        </p>
+             </p>
+            <div class= "video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/7xTGNNLPyMI"
+                    title="Deep Dive into LLMs like CHATGPT"
+                    frameborder= "0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-pictur; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+       
     </section>
 
     <!-- STATS -->
